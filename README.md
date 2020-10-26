@@ -2,14 +2,14 @@
 A nodejs based image board
 
 
-##To-do
+## To-do
 
 - [ ] Learn how to created a rest api in node
   - [ ] Learn how to use sql in node
   - [ ] Look for node packages to help
 - [ ] Look for appropriate build tools
 
-##Backend
+## Backend
 - [ ] Design Database
 - [ ] Send op post json to client
 - [ ] Send replies json to client 
@@ -17,7 +17,7 @@ A nodejs based image board
  - [ ] Store these in a database (sql)
  - [ ] Convert images into full res and thumbnail
  
-##Create front end in svelte
+## Create front end in svelte
 - [ ] Basic page showing op posts from node api
 - [ ] Basic page showing replies to a particular op
 - [ ] Form/ Reply box to allow users to make posts
@@ -27,7 +27,7 @@ A nodejs based image board
   - [ ] Auto update thread on timer
   - [ ] Expand all images button to show all iamges in full res
   
- ##Report
+ ## Report
  - [ ] Explain why I chose svelte and compare to node
  - [ ] Explain why I'm using node for backend
    - [ ] Objects can be sent as json via http
