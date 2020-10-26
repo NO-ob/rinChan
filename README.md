@@ -2,8 +2,9 @@
 A nodejs based image board
 
 
-## To-do
+# To-do
 
+## Research
 - [ ] Learn how to created a rest api in node
   - [ ] Learn how to use sql in node
   - [ ] Look for node packages to help
