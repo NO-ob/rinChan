@@ -2,35 +2,129 @@
 A nodejs based image board
 
 
-# To-do
+# Running
 
-## Research
-- [ ] Learn how to created a rest api in node
-  - [ ] Learn how to use sql in node
-  - [ ] Look for node packages to help
-- [ ] Look for appropriate build tools
+## Dependencies
+ImageMagick, node
 
-## Backend
-- [ ] Design Database
-- [ ] Send op post json to client
-- [ ] Send replies json to client 
-- [ ] Allow client to upload text/ images
- - [ ] Store these in a database (sql)
- - [ ] Convert images into full res and thumbnail
- 
-## Create front end in svelte
-- [ ] Basic page showing op posts from node api
-- [ ] Basic page showing replies to a particular op
-- [ ] Form/ Reply box to allow users to make posts
-    - [ ] Send post text to the api
-    - [ ] Send post image to the api
-- [ ] Extra Features
-  - [ ] Auto update thread on timer
-  - [ ] Expand all images button to show all iamges in full res
-  
- ## Report
- - [ ] Explain why I chose svelte and compare to node
- - [ ] Explain why I'm using node for backend
-   - [ ] Objects can be sent as json via http
- - [ ] Document development
+## rinChanServer
+
+The imgOutDir variable in rinChanServer/api.js needs to be set to /PATH TO/rinChanWebUI/public/images/
+
+It can then be launched by running:
+```
+npm install
+npm start
+```
+
+## rinChanWebUI
+
+The apiURL variable in rinChanWebUI/src/App.svelte and rinChanWebUI/src/ReplyInputContainer.svelte needs to be set to the url the server is running on including the port 
+
+It can then be launched by running:
+```
+npm install 
+npm run dev
+```
+To build the webUI you can run:
+```
+npm run build
+```
+This will produce a minified files which can then be deployed to a server, every thing in the rinChanWebUI/public/ folder is needed
+
+
+
+# API
+
+## Board List
+
+**Url for api Access:** /api/boards
+
+**Request Type:** GET
+
+**Returns:** List of JSON boardPair objects
+
+**Example Output:**
+```
+[{boardID: g , boardName: Technology}]
+```
+
+## Post List
+
+**Url for api Access:** /api/posts?thread=[threadID]
+
+**Url for api Access:** /api/posts?board=[boardID]
+
+**Request Type:** GET
+
+**Returns:** List of JSON boardPost objects
+
+**Example Output:**
+```
+[{"postID":1,"name":"Anonymous ","subject":"First
+op","posterID":null,"dateTime":"2020-12-07
+15:48:06","fileName":"EmuG-mLVQAAyumW.jpg","postText":"testing form
+submission","fileExt":"jpeg","replyToID":null}]
+```
+
+## Post Submission
+
+**Url for api Access:** /api/submitPost
+
+**Request Type:** POST
+
+**Returns:** Status
+
+**Required Data:** HTML Form Enctype - multipart/form-data
+
+**Values:** input type=text name=name
+textarea type=text name=postText
+Input type=file name=userImage accept=image/*
+
+**Notes:** If name is blank, name will be “Anonymous”.
+userImage is required if postText is blank.
+
+Example form:
+```
+<form action="http://localhost:5050/api/submitPost" enctype="multipart/form-data"
+method="post" id="postForm">
+<input type="text" id="nameInput" placeholder="Name" name="name"/>
+<textarea placeholder="Comment" id="textInput"
+name="postText"></textarea>
+<input type="file" id="imageInput" name="userImage" accept="image/*" />
+<button id="replySubmit">Submit</button>
+</form>
+```
+
+## Opening Post Submission
+
+**Url for api Access:** /api/submitOp
+
+**Request Type:** POST
+
+**Returns:** Status
+
+**Required Data:** HTML Form Enctype - multipart/form-data
+
+**Values:** input type=text name=name
+input type=text name=subject
+textarea type=text name=postText
+Input type=file name=userImage accept=image/*
+
+**Notes:** If name is blank, name will be “Anonymous”.
+userImage must contain an image.
+postText or subject must contain text.
+
+**Example form:**
+```
+<form action="http://localhost:5050/api/submitPost" enctype="multipart/form-data"
+method="post" id="postForm">
+<input type="text" id="nameInput" placeholder="Name" name="name"/>
+<textarea placeholder="Comment" id="textInput"
+name="postText"></textarea>
+<input type="file" id="imageInput" name="userImage" accept="image/*" />
+<button id="replySubmit">Submit</button>
+</form>
+```
+
  
